@@ -617,6 +617,235 @@
                 grid-template-columns: 1fr 1fr;
             }
         }
+        /* ===== AI SOMMELIER CHATBOT ===== */
+        .chat-fab {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            color: var(--card-bg);
+            border: none;
+            cursor: pointer;
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            z-index: 2000;
+            transition: all 0.3s ease;
+        }
+        .chat-fab:hover {
+            background: var(--accent-dark);
+            transform: scale(1.1);
+            box-shadow: 0 6px 28px rgba(0,0,0,0.5);
+        }
+        .chat-fab-label {
+            position: absolute;
+            right: 70px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            white-space: nowrap;
+            border: 1px solid var(--border);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .chat-fab:hover .chat-fab-label { opacity: 1; }
+
+        .chat-panel {
+            position: fixed;
+            bottom: 100px;
+            right: 28px;
+            width: 420px;
+            max-height: 70vh;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+            z-index: 1999;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.25s ease;
+        }
+        .chat-panel.open {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+        .chat-panel-header {
+            padding: 16px 20px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+        .chat-panel-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+        .chat-panel-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .chat-close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 22px;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+        .chat-close-btn:hover { color: var(--text-primary); }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 200px;
+        }
+        .chat-message {
+            display: flex;
+            flex-direction: column;
+            max-width: 88%;
+        }
+        .chat-message.user { align-self: flex-end; }
+        .chat-message.assistant { align-self: flex-start; }
+        .chat-bubble {
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .chat-message.user .chat-bubble {
+            background: var(--accent-primary);
+            color: var(--card-bg);
+            border-bottom-right-radius: 4px;
+        }
+        .chat-message.assistant .chat-bubble {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-bottom-left-radius: 4px;
+        }
+        .chat-sender {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            padding: 0 4px;
+        }
+        .chat-message.user .chat-sender { text-align: right; }
+        .chat-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 0 16px 12px;
+            flex-shrink: 0;
+        }
+        .chat-suggestion-chip {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .chat-suggestion-chip:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+        .chat-input-row {
+            padding: 12px 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: 'Lato', sans-serif;
+            outline: none;
+            resize: none;
+            max-height: 80px;
+            line-height: 1.4;
+        }
+        .chat-input:focus { border-color: var(--accent-primary); }
+        .chat-send-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            border: none;
+            color: var(--card-bg);
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        .chat-send-btn:hover { background: var(--accent-dark); }
+        .chat-send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .chat-thinking {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 10px 14px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            border-bottom-left-radius: 4px;
+            width: fit-content;
+        }
+        .chat-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: chatBounce 1.2s infinite;
+        }
+        .chat-dot:nth-child(2) { animation-delay: 0.2s; }
+        .chat-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes chatBounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-6px); }
+        }
+        @media (max-width: 768px) {
+            .chat-panel {
+                width: calc(100vw - 24px);
+                right: 12px;
+                bottom: 90px;
+                max-height: 65vh;
+            }
+            .chat-fab { bottom: 20px; right: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -677,12 +906,9 @@
                         <option value="">All Wine Types</option>
                     </select>
                     <select id="sortBy" onchange="sortWines()">
-                        <option value="name">Name</option>
-                        <option value="vintage">Vintage</option>
                         <option value="producer">Producer</option>
-                        <option value="country">Country</option>
+                        <option value="vintage">Vintage</option>
                         <option value="drinkFrom">Drink From</option>
-                        <option value="drinkTo">Drink To</option>
                         <option value="score">Score</option>
                     </select>
                 </div>
@@ -811,7 +1037,7 @@
                     <input type="number" id="addCommunityScore" min="0" max="100">
                 </div>
                 <div class="form-group">
-                    <label>Personal Score (0-100)</label>
+                    <label>Professional Score (0-100)</label>
                     <input type="number" id="addPersonalScore" min="0" max="100">
                 </div>
                 <div class="form-group">
@@ -910,7 +1136,7 @@
                     <input type="number" id="editCommunityScore" min="0" max="100">
                 </div>
                 <div class="form-group">
-                    <label>Personal Score (0-100)</label>
+                    <label>Professional Score (0-100)</label>
                     <input type="number" id="editPersonalScore" min="0" max="100">
                 </div>
                 <div class="form-group">
@@ -1173,15 +1399,15 @@
             
             document.getElementById('wineTypeBreakdown').innerHTML = typeBreakdown || 'No data';
 
-            // Calculate average score - ROUNDED TO WHOLE NUMBER
+            // Calculate average score - uses professionalScore first, communityScore as fallback - ROUNDED TO WHOLE NUMBER
             const winesWithScores = winesInStock.filter(w => {
-                const score = parseFloat(w.communityScore) || parseFloat(w.personalScore) || 0;
+                const score = parseFloat(w.personalScore) || parseFloat(w.communityScore) || 0;
                 return score > 0;
             });
 
             if (winesWithScores.length > 0) {
                 const totalScore = winesWithScores.reduce((sum, wine) => {
-                    const score = parseFloat(wine.communityScore) || parseFloat(wine.personalScore) || 0;
+                    const score = parseFloat(wine.personalScore) || parseFloat(wine.communityScore) || 0;
                     return sum + score;
                 }, 0);
                 const avgScore = Math.round(totalScore / winesWithScores.length);
@@ -1344,22 +1570,16 @@
             
             filtered.sort((a, b) => {
                 switch(sortBy) {
-                    case 'name':
-                        return (a.wineName || '').localeCompare(b.wineName || '');
                     case 'vintage':
                         return (parseInt(b.vintage) || 0) - (parseInt(a.vintage) || 0);
                     case 'producer':
                         return (a.producer || '').localeCompare(b.producer || '');
-                    case 'country':
-                        return (a.country || '').localeCompare(b.country || '');
                     case 'drinkFrom':
                         return (parseInt(a.drinkFrom) || 9999) - (parseInt(b.drinkFrom) || 9999);
-                    case 'drinkTo':
-                        return (parseInt(a.drinkTo) || 9999) - (parseInt(b.drinkTo) || 9999);
                     case 'score':
-                        // Sort by highest score (communityScore or personalScore)
-                        const scoreA = parseFloat(a.communityScore) || parseFloat(a.personalScore) || 0;
-                        const scoreB = parseFloat(b.communityScore) || parseFloat(b.personalScore) || 0;
+                        // Sort by professional score first; fall back to community score (marked with *)
+                        const scoreA = parseFloat(a.personalScore) || parseFloat(a.communityScore) || 0;
+                        const scoreB = parseFloat(b.personalScore) || parseFloat(b.communityScore) || 0;
                         return scoreB - scoreA;
                     default:
                         return 0;
@@ -1389,9 +1609,12 @@
                 const drinkFrom = wine.drinkFrom || '';
                 const drinkTo = wine.drinkTo || '';
                 
-                // Get best available score - ROUNDED TO WHOLE NUMBER
-                const rawScore = parseFloat(wine.communityScore) || parseFloat(wine.personalScore) || null;
+                // Get best available score - professionalScore first, community as fallback - ROUNDED TO WHOLE NUMBER
+                const rawProfScore = parseFloat(wine.personalScore) || null;
+                const rawCommScore = parseFloat(wine.communityScore) || null;
+                const rawScore = rawProfScore || rawCommScore || null;
                 const score = rawScore ? Math.round(rawScore) : null;
+                const scoreLabel = rawScore ? (rawProfScore ? '' : '*') : '';
                 
                 return `
                     <div class="wine-card ${isExpanded ? 'expanded' : ''}" id="card-${wineId}">
@@ -1406,7 +1629,7 @@
                                 <div class="wine-meta">
                                     <span class="wine-type-badge ${(wine.wineType || '').toLowerCase()}">${wine.wineType || ''}</span>
                                     ${wine.vintage || ''} ${wine.varietal ? '| ' + wine.varietal : ''}
-                                    ${score ? `<span class="wine-score-badge">${score}</span>` : ''}
+                                    ${score ? `<span class="wine-score-badge" title="${scoreLabel ? 'Community score (no professional score available)' : 'Professional score'}">${score}${scoreLabel}</span>` : ''}
                                 </div>
                             </div>
                         </div>
@@ -1513,7 +1736,7 @@
                                 ` : ''}
                                 ${wine.personalScore ? `
                                     <div class="wine-detail-row">
-                                        <span class="wine-detail-label">Personal Score:</span>
+                                        <span class="wine-detail-label">Professional Score:</span>
                                         <span class="wine-detail-value">${Math.round(parseFloat(wine.personalScore))}/100</span>
                                     </div>
                                 ` : ''}
@@ -1872,5 +2095,197 @@
         window.sortWines = sortWines;
         window.toggleTheme = toggleTheme;
     </script>
+
+    <!-- AI Sommelier Chatbot FAB -->
+    <button class="chat-fab" onclick="toggleChatPanel()" title="Ask your AI Sommelier">
+        <span class="chat-fab-label">AI Sommelier</span>
+        🍷
+    </button>
+
+    <!-- Chatbot Panel -->
+    <div class="chat-panel" id="chatPanel">
+        <div class="chat-panel-header">
+            <div>
+                <div class="chat-panel-title">🍷 AI Sommelier</div>
+                <div class="chat-panel-subtitle">Powered by Claude · Knows your cellar</div>
+            </div>
+            <button class="chat-close-btn" onclick="toggleChatPanel()">×</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-message assistant">
+                <div class="chat-sender">Sommelier</div>
+                <div class="chat-bubble">Bonjour! I'm your personal AI sommelier. I know every wine in your cellar and can search the wider wine world too. Ask me for a food pairing, a wine recommendation, or anything about wine!</div>
+            </div>
+        </div>
+        <div class="chat-suggestions" id="chatSuggestions">
+            <div class="chat-suggestion-chip" onclick="sendSuggestion('What wine should I open with a lamb roast?')">🥩 Lamb pairing</div>
+            <div class="chat-suggestion-chip" onclick="sendSuggestion('What food goes well with my best red wines?')">🍽️ Food for reds</div>
+            <div class="chat-suggestion-chip" onclick="sendSuggestion('Which of my wines should I open soonest?')">⏰ Drink soon</div>
+            <div class="chat-suggestion-chip" onclick="sendSuggestion('Tell me about Bordeaux vintages')">📚 Wine knowledge</div>
+        </div>
+        <div class="chat-input-row">
+            <textarea class="chat-input" id="chatInput" placeholder="Ask about food pairings, wine recommendations..." rows="1" onkeydown="handleChatKey(event)" oninput="autoResizeChat(this)"></textarea>
+            <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMessage()">➤</button>
+        </div>
+    </div>
+
+    <script>
+        // ===== CHATBOT LOGIC =====
+        let chatHistory = [];
+        let chatOpen = false;
+
+        function toggleChatPanel() {
+            chatOpen = !chatOpen;
+            document.getElementById('chatPanel').classList.toggle('open', chatOpen);
+            if (chatOpen) {
+                setTimeout(() => document.getElementById('chatInput').focus(), 300);
+            }
+        }
+
+        function autoResizeChat(el) {
+            el.style.height = 'auto';
+            el.style.height = Math.min(el.scrollHeight, 80) + 'px';
+        }
+
+        function handleChatKey(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendChatMessage();
+            }
+        }
+
+        function sendSuggestion(text) {
+            document.getElementById('chatInput').value = text;
+            sendChatMessage();
+        }
+
+        function buildCellarContext() {
+            if (!allWines || allWines.length === 0) return "The cellar is currently empty or still loading.";
+            const inStock = allWines.filter(w => parseInt(w.quantity) > 0);
+            const lines = inStock.map(w => {
+                const score = w.personalScore ? `Prof.Score:${w.personalScore}` : (w.communityScore ? `CommunityScore:${w.communityScore}*` : '');
+                return `- ${w.wineName} (${w.producer}, ${w.vintage}, ${w.wineType}, ${w.region || ''}, ${w.country || ''}, Qty:${w.quantity}${score ? ', ' + score : ''}${w.drinkFrom ? ', DrinkFrom:'+w.drinkFrom : ''}${w.drinkTo ? '-'+w.drinkTo : ''}${w.foodPairings ? ', Pairings:'+w.foodPairings : ''})`;
+            });
+            return `Tracy's wine cellar currently has ${inStock.length} wines in stock:\n${lines.join('\n')}`;
+        }
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const userText = input.value.trim();
+            if (!userText) return;
+
+            // Clear input
+            input.value = '';
+            input.style.height = 'auto';
+
+            // Hide suggestions after first message
+            document.getElementById('chatSuggestions').style.display = 'none';
+
+            // Add user message to UI
+            appendChatMessage('user', userText);
+
+            // Add to history
+            chatHistory.push({ role: 'user', content: userText });
+
+            // Show thinking indicator
+            const thinkingId = showThinking();
+
+            // Disable send button
+            const sendBtn = document.getElementById('chatSendBtn');
+            sendBtn.disabled = true;
+
+            try {
+                const cellarContext = buildCellarContext();
+                const systemPrompt = `You are an expert AI sommelier assistant for Tracy's personal wine cellar management app. You have deep knowledge of wines, regions, vintages, food pairings, and wine criticism.
+
+${cellarContext}
+
+Your role:
+1. When asked about food pairings, recommend specific wines FROM TRACY'S CELLAR that pair well, citing the wine name, vintage, and why it pairs well
+2. When asked what food goes with a wine, suggest food pairings based on the wine's profile
+3. When asked general wine questions, answer with expertise
+4. Reference professional scores (marked without *) and community scores (marked with *) when relevant
+5. If no wines in the cellar match, say so and suggest what to look for when buying
+
+Keep responses concise, warm, and expert. Use wine terminology naturally. Format wine names in bold when mentioning them. If recommending a wine, always mention how many bottles are left.`;
+
+                // Call via Apps Script proxy (avoids CORS, keeps API key secure)
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'chat',
+                        systemPrompt: systemPrompt,
+                        messages: chatHistory.map(m => ({ role: m.role, content: m.content }))
+                    })
+                });
+
+                const data = await response.json();
+                removeThinking(thinkingId);
+
+                if (data.error) {
+                    appendChatMessage('assistant', `Sorry, I had trouble: ${data.error}. Please try again.`);
+                } else if (data.reply) {
+                    chatHistory.push({ role: 'assistant', content: data.reply });
+                    appendChatMessage('assistant', data.reply);
+                }
+
+            } catch (err) {
+                removeThinking(thinkingId);
+                appendChatMessage('assistant', 'Sorry, I couldn\'t connect right now. Please try again in a moment.');
+                console.error('Chat error:', err);
+            }
+
+            sendBtn.disabled = false;
+        }
+
+        function appendChatMessage(role, text) {
+            const messages = document.getElementById('chatMessages');
+            const div = document.createElement('div');
+            div.className = `chat-message ${role}`;
+
+            // Convert basic markdown-like bold (**text**) to <strong>
+            const formatted = text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n/g, '<br>');
+
+            div.innerHTML = `
+                <div class="chat-sender">${role === 'user' ? 'You' : 'Sommelier'}</div>
+                <div class="chat-bubble">${formatted}</div>
+            `;
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function showThinking() {
+            const messages = document.getElementById('chatMessages');
+            const id = 'thinking-' + Date.now();
+            const div = document.createElement('div');
+            div.className = 'chat-message assistant';
+            div.id = id;
+            div.innerHTML = `
+                <div class="chat-sender">Sommelier</div>
+                <div class="chat-thinking">
+                    <div class="chat-dot"></div>
+                    <div class="chat-dot"></div>
+                    <div class="chat-dot"></div>
+                </div>
+            `;
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+            return id;
+        }
+
+        function removeThinking(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        window.toggleChatPanel = toggleChatPanel;
+        window.sendChatMessage = sendChatMessage;
+        window.sendSuggestion = sendSuggestion;
+        window.handleChatKey = handleChatKey;
+        window.autoResizeChat = autoResizeChat;
+    </script>
+
 </body>
 </html>
